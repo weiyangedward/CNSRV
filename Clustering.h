@@ -29,7 +29,7 @@ class Clustering
 private:
     bool has_noise_cluster; // if clustering should include noise cluster
     int num_species;
-    double coupling_constant;
+    double lambda;
     int num_clusters;
 
     int *species_num_nodes; // number of nodes species co-express network
@@ -88,7 +88,7 @@ public:
                int num_species,
                Orthology *orthology,
                int num_clusters,
-               double coupling_constant,
+               double lambda,
                bool has_noise_cluster);
 
     ~Clustering();

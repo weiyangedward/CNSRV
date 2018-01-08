@@ -1,19 +1,19 @@
 #include "Clustering.h"
 
-/* Destructor */
+/**
+ * Destructor
+ */
 Clustering::~Clustering()
 {
     fprintf(stderr, "Clustering destructor\n");
-    for (int spe=0; spe<num_species; spe++)
-    {
+    for (int spe=0; spe<num_species; spe++) {
         delete node_assigned_cluster[spe];
         delete best_node_assigned_cluster[spe];
         species_cluster_size.clear();
         species_cluster_inEdges.clear();
         species_cluster_outEdges.clear();
         species_cluster_coexpress_cost.clear();
-        for (int clus = 0; clus< num_clusters; clus++)
-        {
+        for (int clus = 0; clus< num_clusters; clus++) {
             spe_cluster_nodes[spe][clus].clear();
         }
         spe_cluster_nodes[spe].clear();
@@ -25,18 +25,17 @@ Clustering::~Clustering()
     changed_nodes.clear();
 }
 
-/* Constructor */
-Clustering::Clustering(SpeciesNetwork **species_network,
-                       int num_species,
-                       Orthology *orthology,
-                       int num_clusters,
-                       double coupling_constant,
-                       bool has_noise_cluster)
-        : num_species(num_species),
-        num_clusters(num_clusters),
-        coupling_constant(coupling_constant),
-        has_noise_cluster(has_noise_cluster)
-{
+/**
+ * Constructor
+ * @param species_network
+ * @param num_species
+ * @param orthology
+ * @param num_clusters
+ * @param lambda
+ * @param has_noise_cluster
+ */
+Clustering::Clustering(SpeciesNetwork **species_network, int num_species, Orthology *orthology, int num_clusters, double lambda, bool has_noise_cluster)
+        : num_species(num_species), num_clusters(num_clusters), lambda(lambda), has_noise_cluster(has_noise_cluster) {
     srand((int)time(NULL)); // random seed for local time
 //    srand(1); // fix random seed
 
@@ -98,7 +97,7 @@ Clustering::Clustering(SpeciesNetwork **species_network,
     current_coexpress_cost = 0.0;
     current_orth_cost = 0.0;
 
-    /*
+    /**
      * a normalize constant to scale ortho cost to
      * the same as coexpress cost = #nodes in all species
      * given cost for each cluster is [0,1]
@@ -108,23 +107,23 @@ Clustering::Clustering(SpeciesNetwork **species_network,
 
     coexpress_normalize_constant = (double)total_num_nodes / ((double)num_clusters * (double)num_species / 2);
 
-    if (coupling_constant > 0 && coupling_constant < 1) /* has orthologous term */
+    if (lambda > 0 && lambda < 1) /* has orthologous term */
     {
         current_coexpress_cost = get_coexpress_cost(species_network);
         current_orth_cost = get_orth_cost(orthology);
-        current_total_cost = (1-coupling_constant) * current_coexpress_cost * coexpress_normalize_constant + coupling_constant * current_orth_cost * ortho_normalize_constant;
+        current_total_cost = (1-lambda) * current_coexpress_cost * coexpress_normalize_constant + lambda * current_orth_cost * ortho_normalize_constant;
     }
-    else if (coupling_constant == 0)
+    else if (lambda == 0)
     { /* no orthologous term */
         current_coexpress_cost = get_coexpress_cost(species_network);
         current_total_cost = current_coexpress_cost * coexpress_normalize_constant;
     }
-    else if (coupling_constant == 1)
+    else if (lambda == 1)
     {
         current_orth_cost = get_orth_cost(orthology);
         current_total_cost = current_orth_cost * ortho_normalize_constant;
     }
-    fprintf(stderr, "orth_cost %g, ortho_normalize_constant %g, coexpress_normalize_constant %g, coexpression cc = %g, current_coexpress_cost %g\n", current_orth_cost, ortho_normalize_constant, coexpress_normalize_constant, 1-coupling_constant, current_coexpress_cost);
+    fprintf(stderr, "orth_cost %g, ortho_normalize_constant %g, coexpress_normalize_constant %g, coexpression cc = %g, current_coexpress_cost %g\n", current_orth_cost, ortho_normalize_constant, coexpress_normalize_constant, 1-lambda, current_coexpress_cost);
 
     // init best_total_cost to curr cost
     best_total_cost = current_total_cost;
@@ -186,7 +185,7 @@ void Clustering::pre_set(char *filename, Orthology *orthology, SpeciesNetwork **
     }
     fclose(F);
     current_coexpress_cost = get_coexpress_cost(species_network);
-    current_total_cost = current_coexpress_cost + coupling_constant * get_orth_cost(orthology);
+    current_total_cost = current_coexpress_cost + lambda * get_orth_cost(orthology);
 }
 
 
@@ -257,7 +256,7 @@ void Clustering::learn_ground_state(SpeciesNetwork **species_network, Orthology 
             /*
              * delta cost is used
              * */
-            if (coupling_constant > 0 && coupling_constant < 1)
+            if (lambda > 0 && lambda < 1)
             {
                 if (has_noise_cluster) {
                     coexpress_delta_cost = get_coexpress_delta_cost(species_network);
@@ -270,10 +269,10 @@ void Clustering::learn_ground_state(SpeciesNetwork **species_network, Orthology 
 
                 current_orth_cost += delta_orth_cost;
 
-                new_total_cost = (1-coupling_constant) * new_coexpress_cost * coexpress_normalize_constant + coupling_constant * current_orth_cost * ortho_normalize_constant;
+                new_total_cost = (1-lambda) * new_coexpress_cost * coexpress_normalize_constant + lambda * current_orth_cost * ortho_normalize_constant;
 
             }
-            else if (coupling_constant == 0)
+            else if (lambda == 0)
             {
                 if (has_noise_cluster) {
                     coexpress_delta_cost = get_coexpress_delta_cost(species_network);
@@ -283,7 +282,7 @@ void Clustering::learn_ground_state(SpeciesNetwork **species_network, Orthology 
                 new_coexpress_cost = old_coexpress_cost + coexpress_delta_cost;
                 new_total_cost = new_coexpress_cost * coexpress_normalize_constant;
             }
-            else if (coupling_constant == 1)
+            else if (lambda == 1)
             {
                 delta_orth_cost = get_orth_delta_cost(orthology, species_network, current_orth_cost);
 
@@ -294,7 +293,7 @@ void Clustering::learn_ground_state(SpeciesNetwork **species_network, Orthology 
             /*
              * not using delta cost
              * */
-//            if (coupling_constant > 0 && coupling_constant < 1)
+//            if (lambda > 0 && lambda < 1)
 //            {
 //                new_coexpress_cost = get_coexpress_cost(species_network);
 //
@@ -302,15 +301,15 @@ void Clustering::learn_ground_state(SpeciesNetwork **species_network, Orthology 
 //
 //                current_orth_cost += delta_orth_cost;
 //
-//                new_total_cost = (1-coupling_constant) * new_coexpress_cost + coupling_constant * current_orth_cost * ortho_normalize_constant;
+//                new_total_cost = (1-lambda) * new_coexpress_cost + lambda * current_orth_cost * ortho_normalize_constant;
 //
 //            }
-//            else if (coupling_constant == 0)
+//            else if (lambda == 0)
 //            {
 //                new_coexpress_cost = get_coexpress_cost(species_network);
 //                new_total_cost = new_coexpress_cost;
 //            }
-//            else if (coupling_constant == 1)
+//            else if (lambda == 1)
 //            {
 //                delta_orth_cost = get_orth_delta_cost(orthology, species_network, current_orth_cost);
 //
@@ -321,7 +320,7 @@ void Clustering::learn_ground_state(SpeciesNetwork **species_network, Orthology 
 
 
             if (SA_counter % HOWMANYITERTOSHOW == 0 or show_log)
-                fprintf(stderr, "orth_cost %g, ortho_normalize_constant %g, coexpress_normalize_constant %g, coexpress cost %g, coupling_constant %g\n", current_orth_cost, ortho_normalize_constant, coexpress_normalize_constant, new_coexpress_cost, coupling_constant);
+                fprintf(stderr, "orth_cost %g, ortho_normalize_constant %g, coexpress_normalize_constant %g, coexpress cost %g, lambda %g\n", current_orth_cost, ortho_normalize_constant, coexpress_normalize_constant, new_coexpress_cost, lambda);
 
             double delta_total_cost = new_total_cost - old_total_cost; // compute delta cost that includes orth term
 
@@ -854,7 +853,7 @@ double Clustering::get_orth_cost(Orthology *orthology)
 
 //    if (SA_counter % HOWMANYITERTOSHOW == 0)
 //    fprintf(stderr, "total ortho noise %g\n", total_ortho_noise);
-    //    fprintf(stderr, "cc = %g\tcccost = %g\n",coupling_constant, coupling_constant*orthterms); // prev log, print orth term
+    //    fprintf(stderr, "cc = %g\tcccost = %g\n",lambda, lambda*orthterms); // prev log, print orth term
     return -orthterms;
 }
 

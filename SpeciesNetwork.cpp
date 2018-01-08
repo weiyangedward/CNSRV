@@ -4,7 +4,9 @@
 
 #include "SpeciesNetwork.h"
 
-
+/**
+ * Destructor
+ */
 SpeciesNetwork::~SpeciesNetwork()
 {
     fprintf(stderr, "SpeciesNetwork destructor\n");
@@ -12,9 +14,16 @@ SpeciesNetwork::~SpeciesNetwork()
     geneName_to_uniqId.clear();
 }
 
+/**
+ * default Constructor
+ */
 SpeciesNetwork::SpeciesNetwork()
 { }
 
+/**
+ * Constructor
+ * @param network_file
+ */
 SpeciesNetwork::SpeciesNetwork(char *network_file)
 {
     unique_node = 0;

@@ -4,7 +4,9 @@
 
 #include "Orthology.h"
 
-
+/**
+ * Destructor
+ */
 Orthology::~Orthology()
 {
     fprintf(stderr, "Orthology destructor\n");
@@ -25,12 +27,18 @@ Orthology::~Orthology()
     speciesName_to_id.clear();
 }
 
+/**
+ * Default Constructor
+ */
 Orthology::Orthology() { }
 
-Orthology::Orthology(char *orth_file,
-                     SpeciesNetwork **species_network,
-                     int num_species)
-{
+/**
+ * Constructor
+ * @param orth_file
+ * @param species_network
+ * @param num_species
+ */
+Orthology::Orthology(char *orth_file, SpeciesNetwork **species_network, int num_species) {
     fprintf(stderr, "Orthology....\n");
     this->num_species = num_species;
     orth_edges = new unordered_map<NodePair*, int, NodePairHasher, eqNodePair> *[num_species];
@@ -147,16 +155,20 @@ void Orthology::normalize_edge_weight()
     }
 }
 
-pair<int, int> Orthology::get_gene_pair(SpeciesNetwork **species_network, char *g1, char *g2, pair<int, int>& species)
-{
+pair<int, int> Orthology::get_gene_pair(SpeciesNetwork **species_network, char *g1, char *g2, pair<int, int>& species) {
     string str_gene_id1(g1);
     string str_gene_id2(g2);
 //    if (stoi(str_gene_id1) == 108 and species.first == 2)
 //        fprintf(stderr, "spe%d, spe%d, g%d, g%d\n", species.first, species.second, stoi(str_gene_id1), stoi(str_gene_id2));
 
     // skip genes that are not found in co-expression network
-    if (species_network[species.first]->geneName_to_uniqId.find(str_gene_id1) == species_network[species.first]->geneName_to_uniqId.end()) { return make_pair(-1,-1); }
-    if (species_network[species.second]->geneName_to_uniqId.find(str_gene_id2) == species_network[species.second]->geneName_to_uniqId.end()) { return make_pair(-1,-1); }
+    if (species_network[species.first]->geneName_to_uniqId.find(str_gene_id1) == species_network[species.first]->geneName_to_uniqId.end()) {
+        return make_pair(-1,-1);
+    }
+
+    if (species_network[species.second]->geneName_to_uniqId.find(str_gene_id2) == species_network[species.second]->geneName_to_uniqId.end()) {
+        return make_pair(-1,-1);
+    }
 
     // get converted geneID in (1,N)
     int gene1_id = species_network[species.first]->geneName_to_uniqId[str_gene_id1];
@@ -175,6 +187,7 @@ pair<int, int> Orthology::get_spe_pair(char *spe1, char *spe2, char *orth_file)
         fprintf(stderr, "Error: orthology file %s has species name that wasn't seen in network files\n", orth_file);
         exit(1);
     }
+
     if (speciesName_to_id.find(str_spe2) == speciesName_to_id.end()) {
         fprintf(stderr, "Error: orthology file %s has species name that wasnt seen in network files\n", orth_file);
         exit(1);

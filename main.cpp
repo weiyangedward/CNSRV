@@ -10,17 +10,20 @@ int main (int argc, char * const argv[]) {
 
     if (argc < 7)
     {
-        printf("usage: %s "
-                       "<num_clusters> "
-                       "<num_trials> "
-                       "<coupling_constant> "
-                       "<orth_file> "
-                       "<num_species> "
-                       "<spc1nw> "
-                       "<spc2nw> ... "
-                       "-s:string <start_clustering_file> "
-                       "-t:double <max_temp> "
-                       "-n <clustering with noise cluster> \n", argv[0]);
+        printf("USAGE:\n"
+                       "  %s num_clusters num_trials lambda orth_file num_species spc1nw [spc2nw,...] [-t] \n"
+                       "\nWhere:\n"
+                       "  num_clusters: number of clusters\n"
+                       "  num_trials: number of experiments to run and report the best one\n"
+                       "  lambda: coefficient of orthologous term, (1-lambda) is the coefficient of coexpression term\n"
+                       "  orth_file: file of orthologous edges\n"
+                       "  num_species: number of species\n"
+                       "  spc1nw: file of coexpression network at species 1\n"
+                       "  spc2nw,...: files of coexpression network at species 2 and more\n"
+                       "  -t <float>: start temperature of simulated annealing (default is 10.0)\n"
+
+
+                , argv[0]);
         exit(1);
     }
 
@@ -30,7 +33,7 @@ int main (int argc, char * const argv[]) {
     int num_clusters = atoi(argv[argbase++]); // num clusters
     num_clusters +=1; // add one more cluster: 'noise cluster 0'
     int num_trials = atoi(argv[argbase++]); // number of trials
-    double coupling_constant = atof(argv[argbase++]); // coupling_constant
+    double lambda = atof(argv[argbase++]); // lambda
     char *orth_file = argv[argbase++]; // ortholog files
     int num_species = atoi(argv[argbase++]); // number of species
 
@@ -45,20 +48,19 @@ int main (int argc, char * const argv[]) {
 
 
 
-    /* read parameters: startclusfn '-s' and max_temp '-t', noise_cluster '-n', weight for noise term '-lambda' */
+    /* read parameters: startclusfn '-s' and max_temp '-t', noise_cluster '-n' */
     char startclusfn[1024]; startclusfn[0] = 0;
-    double max_temp = -1;
+    double max_temp = 10.0;
     bool has_noise_cluster = false;
-    double lambda = 1.0;
     while (argbase < argc)
     {
         // ground-truth clutering
-        if (!strcmp(argv[argbase], "-s"))
-        {
-            argbase++;
-            strcpy(startclusfn, argv[argbase++]);
-            continue;
-        }
+//        if (!strcmp(argv[argbase], "-s"))
+//        {
+//            argbase++;
+//            strcpy(startclusfn, argv[argbase++]);
+//            continue;
+//        }
         // starting tempreture
         if (!strcmp(argv[argbase], "-t"))
         {
@@ -67,12 +69,12 @@ int main (int argc, char * const argv[]) {
             continue;
         }
         // has noise cluster
-        if (!strcmp(argv[argbase], "-n"))
-        {
-            argbase++;
-            has_noise_cluster = true;
-            continue;
-        }
+//        if (!strcmp(argv[argbase], "-n"))
+//        {
+//            argbase++;
+//            has_noise_cluster = true;
+//            continue;
+//        }
     }
 
 
@@ -94,7 +96,7 @@ int main (int argc, char * const argv[]) {
                                        num_species,
                                        orthology,
                                        num_clusters,
-                                       coupling_constant,
+                                       lambda,
                                        has_noise_cluster);
 
         // use ground-truth clustering label as start point
