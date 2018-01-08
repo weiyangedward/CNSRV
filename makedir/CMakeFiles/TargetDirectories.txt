@@ -1,3 +1,3 @@
-/home/n-z/weiyang4/simons/Wei/software/WlogVImplement/makedir/CMakeFiles/edit_cache.dir
-/home/n-z/weiyang4/simons/Wei/software/WlogVImplement/makedir/CMakeFiles/rebuild_cache.dir
-/home/n-z/weiyang4/simons/Wei/software/WlogVImplement/makedir/CMakeFiles/WlogVImplement.dir
+/home/weiyang/Documents/CNSRV/makedir/CMakeFiles/rebuild_cache.dir
+/home/weiyang/Documents/CNSRV/makedir/CMakeFiles/edit_cache.dir
+/home/weiyang/Documents/CNSRV/makedir/CMakeFiles/CNSRV.dir
