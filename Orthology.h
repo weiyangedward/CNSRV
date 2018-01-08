@@ -23,7 +23,7 @@ using namespace std;
 
 class Orthology {
 
-/* instances */
+
 public:
     struct NodePair
     {
