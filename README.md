@@ -7,7 +7,10 @@
 ## Note:
 1. You might need to update cmake version to the latest one
 
-# Run:
+# To run:
+$ ./makedir/CNSRV
+
+## Run on sample dataset:
 1. cd output/
 2. sh run.sh
 
