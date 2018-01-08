@@ -1,3 +1,7 @@
+# Description
+
+This repo contains source code for "Common NetworkS ReVealed" (CNSRV) in paper "Novel cross-species systems biology analyses reveal a deeply conserved transcriptional response to social challenge". Detailed explaination of the model please refer to the main paper and supplement [link].
+
 # Compile:
 1. cd makedir/
 2. rm *
