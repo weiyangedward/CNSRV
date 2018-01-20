@@ -11,17 +11,16 @@ int main (int argc, char * const argv[]) {
     if (argc < 7)
     {
         printf("USAGE:\n"
-                       "  %s num_clusters num_trials lambda orth_file num_species spc1nw [spc2nw,...] [-t] \n"
+                       "\t%s num_clusters num_trials lambda orth_file num_species spc1nw [spc2nw,...] [-t] \n"
                        "\nWhere:\n"
-                       "  num_clusters: number of clusters\n"
-                       "  num_trials: number of experiments to run and report the best one\n"
-                       "  lambda: coefficient of orthologous term, (1-lambda) is the coefficient of coexpression term\n"
-                       "  orth_file: file of orthologous edges\n"
-                       "  num_species: number of species\n"
-                       "  spc1nw: file of coexpression network at species 1\n"
-                       "  spc2nw,...: files of coexpression network at species 2 and more\n"
-                       "  -t <float>: start temperature of simulated annealing (default is 10.0)\n"
-
+                       "\tnum_clusters: number of clusters\n"
+                       "\tnum_trials: number of experiments to run and report the best one\n"
+                       "\tlambda: coefficient of orthologous term, (1-lambda) is the coefficient of coexpression term\n"
+                       "\torth_file: file of orthologous edges\n"
+                       "\tnum_species: number of species\n"
+                       "\tspc1nw: file of coexpression network at species 1\n"
+                       "\tspc2nw,...: files of coexpression network at species 2 and more\n"
+                       "\t-t <float>: start temperature of simulated annealing (default is 10.0)\n"
 
                 , argv[0]);
         exit(1);
