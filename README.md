@@ -10,13 +10,15 @@ This repo contains source code for "Common NetworkS ReVealed" (CNSRV) presented 
 
 ### Note:
 1. You might need to update cmake version to the latest one
+2. use the same steps to compile evaluate_CNSRV/
 
 # To run:
 $ ./makedir/CNSRV
 
 ### Run on sample dataset:
-1. cd output/
+1. cd sample/
 2. sh run.sh
+3. sh eval.sh (after evaluate_CNSRV compiled)
 
 # TODO:
 
