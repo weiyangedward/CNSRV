@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/weiyang/Documents/CNSRV/evaluate_CNSRV/main.cpp
+iostream
+-
+vector
+-
+cstdlib
+-
+fstream
+-
+sstream
+-
+unordered_map
+-
+utility
+-
+list
+-
+unordered_set
+-
+stdio.h
+-
+string
+-
+

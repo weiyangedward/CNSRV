@@ -1,0 +1,16 @@
+Coexpression statistics:
+spe,cluster,#nodes,in-edge,out-edge,possible_in_edge,possible_out_edge,in-density,out-density,in/out-density_ratio,in/(in+out)_density_ratio
+0,1,2,1,1,1,4,1,0.25,4,0.8
+0,2,2,1,1,1,4,1,0.25,4,0.8
+1,1,2,1,1,1,4,1,0.25,4,0.8
+1,2,2,1,1,1,4,1,0.25,4,0.8
+2,1,2,1,1,1,4,1,0.25,4,0.8
+2,2,2,1,1,1,4,1,0.25,4,0.8
+Orthologous statistics:
+spe1,spe2,cluster,#nodes_in_spe1,#nodes_in_spe2,in-edge,out-edge1,out-edge2,possible_in_edge,possible_out_edge1,possible_out_edge2,in-density,out-density,in/out-density_ratio
+0,1,1,2,2,2,1,0,4,4,4,0.5,0.125,4
+0,1,2,2,2,2,0,1,4,4,4,0.5,0.125,4
+0,2,1,2,2,2,0,0,4,4,4,0.5,1e-07,5e+06
+0,2,2,2,2,2,0,0,4,4,4,0.5,1e-07,5e+06
+1,2,1,2,2,2,1,0,4,4,4,0.5,0.125,4
+1,2,2,2,2,2,0,1,4,4,4,0.5,0.125,4

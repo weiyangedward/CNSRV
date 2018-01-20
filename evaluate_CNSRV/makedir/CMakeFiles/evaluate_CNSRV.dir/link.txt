@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++0x -O3   CMakeFiles/evaluate_CNSRV.dir/main.cpp.o  -o evaluate_CNSRV 
