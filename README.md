@@ -2,7 +2,9 @@
 
 This repo contains source code for "Common NetworkS ReVealed" (CNSRV) presented in paper "Novel cross-species systems biology analyses reveal a deeply conserved transcriptional response to social challenge". Detailed explaination of the model please refer to the main paper and supplement [link].
 
-# Compile:
+# Code
+
+## Compile:
 1. cd makedir/
 2. rm *
 3. cmake ..
@@ -12,6 +14,13 @@ This repo contains source code for "Common NetworkS ReVealed" (CNSRV) presented 
 1. You might need to update cmake version to the latest one
 2. use the same steps to compile evaluate_CNSRV/
 
+# Data:
+
+### Coexpression network:
+
+
+### Orthologous network:
+
 # To run:
 $ ./makedir/CNSRV
 
@@ -19,6 +28,10 @@ $ ./makedir/CNSRV
 1. cd sample/
 2. sh run.sh
 3. sh eval.sh (after evaluate_CNSRV compiled)
+
+# Evaluate results
+
+
 
 # TODO:
 
