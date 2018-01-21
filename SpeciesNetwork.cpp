@@ -7,8 +7,7 @@
 /**
  * Destructor
  */
-SpeciesNetwork::~SpeciesNetwork()
-{
+SpeciesNetwork::~SpeciesNetwork() {
     fprintf(stderr, "SpeciesNetwork destructor\n");
     node_adjList.clear();
     geneName_to_uniqId.clear();
@@ -29,35 +28,31 @@ SpeciesNetwork::SpeciesNetwork(char *network_file)
     unique_node = 0;
     num_edges = 0;
     FILE *F = fopen(network_file, "r"); // open file
-    if (F == NULL)
-    {
+    if (F == NULL) {
         fprintf(stderr, "cannot open file %s", network_file);
         exit(1);
     }
 
     char line[LINELEN]; // buffer for each line
 
-    fgets(line, LINELEN, F); // first line: species name
+    // 1st row: species id
+    fgets(line, LINELEN, F);
     sscanf(line, "%s", (char *) &species_name);
 
-
-    fgets(line, LINELEN, F); // second line: number of nodes
+    // 2nd row: number of nodes
+    fgets(line, LINELEN, F); 
     sscanf(line, "%d", &num_nodes);
 
 
     /* init network adjacency list */
-    for (
-            int i = 0; i < num_nodes; i++
-            )
-    {
+    for (int i = 0; i < num_nodes; i++) {
         vector<int> adj_genes;
         node_adjList.push_back(adj_genes);
     }
 
     // a unique ID assigned each gene so that the all gene IDs will be mapped to 1,2,3,...,n
     /*====== read the rest of network file ======*/
-    while (fgets(line, LINELEN, F))
-    {
+    while (fgets(line, LINELEN, F)) {
 //        char *id1 = new char[LINELEN]; // buff for gene1
 //        char *id2 = new char[LINELEN]; // buff for gene2
         char   id1[LINELEN];
@@ -83,20 +78,14 @@ SpeciesNetwork::SpeciesNetwork(char *network_file)
 }
 
 
-bool SpeciesNetwork::is_edge(int i, int j)
-{
-    if (i >= num_nodes || j >= num_nodes)
-    {
+bool SpeciesNetwork::is_edge(int i, int j) {
+    if (i >= num_nodes || j >= num_nodes) {
         return false;
     }
 
-    for (
-            int k = 0; k < node_adjList[i].size(); k++
-            )
-    {
+    for (int k = 0; k < node_adjList[i].size(); k++) {
         int gene = node_adjList[i][k];
-        if (gene == j)
-        {
+        if (gene == j) {
             return true;
         }
     }
@@ -104,19 +93,15 @@ bool SpeciesNetwork::is_edge(int i, int j)
 }
 
 
-void SpeciesNetwork::hash_gene_id(string &gene_ID, char *network_file)
-{
-    if (geneName_to_uniqId.find(gene_ID) == geneName_to_uniqId.end()) // if gene1 is not seen
-    {
-        fprintf(
-                stderr, "Assigning id %d to node %s in species %s\n", unique_node, gene_ID.c_str(), network_file
-               ); // print out which gene is assigned what unique ID
+void SpeciesNetwork::hash_gene_id(string &gene_ID, char *network_file) {
+    if (geneName_to_uniqId.find(gene_ID) == geneName_to_uniqId.end()) {
+        fprintf(stderr, "Assigning id %d to node %s in species %s\n", unique_node, gene_ID.c_str(), network_file); // print out which gene is assigned what unique ID
 //        uniqId_to_geneName[unique_node] = gene_ID; // create a new entry for (uniq_ID, gene_ID) in hashmap
         geneName_to_uniqId[gene_ID] = unique_node; // create a new entry for (gene_ID, gene_ID) in hashmap
         unique_node++; // increase uniq_ID by 1
 
-        if (unique_node > num_nodes) // error: if uniq_ID > number of nodes
-        {
+        // error: if uniq_ID > number of nodes
+        if (unique_node > num_nodes) {
             printf(
                     "Error: In file %s, read more unique node ids (%d) than the %d expected\n", network_file,
                     unique_node, num_nodes

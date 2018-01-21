@@ -282,30 +282,9 @@ Assigning id 92 to node 104 in species ../data/network2.txt
 Assigning id 93 to node 49 in species ../data/network2.txt
 Assigning id 94 to node 83 in species ../data/network2.txt
 Orthology....
-orth_cost -25, ortho_normalize_constant 1, coexpress_normalize_constant 17.697, coexpression cc = 0.9, current_coexpress_cost -0.546824
+orth_cost -25.0833, ortho_normalize_constant 1, coexpress_normalize_constant 17.1515, coexpression cc = 0.9, current_coexpress_cost -0.672243
 Called LearnGroundState
-Perturb spe 2, node 25, old 9, new 4
-orth_cost -190.667, ortho_normalize_constant 1, coexpress_normalize_constant 17.697, coexpress cost -3.16762, lambda 0.1
-REJECTED MOVE	-69.7893 to -69.5182 at t 0.00278128, prob 1
-spe 0, noise size 0
-spe 1, noise size 0
-spe 2, noise size 0
-C = -69.7893
-Perturb spe 0, node 50, old 2, new 10
-orth_cost -191.75, ortho_normalize_constant 1, coexpress_normalize_constant 17.697, coexpress cost -3.14594, lambda 0.1
-REJECTED MOVE	-69.7918 to -69.2813 at t 7.73554e-05, prob 1
-spe 0, noise size 0
-spe 1, noise size 0
-spe 2, noise size 0
-C = -69.7918
-Perturb spe 0, node 53, old 2, new 8
-orth_cost -191.167, ortho_normalize_constant 1, coexpress_normalize_constant 17.697, coexpress cost -3.1595, lambda 0.1
-REJECTED MOVE	-69.7918 to -69.4388 at t 2.15147e-06, prob 1
-spe 0, noise size 0
-spe 1, noise size 0
-spe 2, noise size 0
-C = -69.7918
-Total time: 16.040274 s
+Total time: 4.491929 s
 Clustering destructor
 SpeciesNetwork destructor
 SpeciesNetwork destructor
