@@ -55,8 +55,8 @@ $ ./makedir/CNSRV
 ### suggested parameters
 1. Parameters used to generate clustering results in paper: 
 	
-	num_clusters: 20
-	num_trials: 1 (run two independent trials and use the best one)
-	lambda: try range from 0 - 1, step size 0.1
+	num_clusters: 20 <br />
+	num_trials: 1 (run two independent trials and use the best one) <br />
+	lambda: try range from 0 - 1, step size 0.1 <br />
 	-t: 10
 
