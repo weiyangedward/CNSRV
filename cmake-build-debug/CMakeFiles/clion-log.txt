@@ -1,4 +1,0 @@
-/home/weiyang/Software/clion-2017.3.1/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/weiyang/Documents/CNSRV
--- Configuring done
--- Generating done
--- Build files have been written to: /home/weiyang/Documents/CNSRV/cmake-build-debug

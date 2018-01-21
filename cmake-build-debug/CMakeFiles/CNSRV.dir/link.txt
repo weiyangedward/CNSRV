@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/CNSRV.dir/Clustering.cpp.o CMakeFiles/CNSRV.dir/main.cpp.o CMakeFiles/CNSRV.dir/Orthology.cpp.o CMakeFiles/CNSRV.dir/SpeciesNetwork.cpp.o  -o CNSRV 

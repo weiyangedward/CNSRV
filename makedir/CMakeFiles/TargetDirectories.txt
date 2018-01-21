@@ -1,3 +1,0 @@
-/home/weiyang/Documents/CNSRV/makedir/CMakeFiles/rebuild_cache.dir
-/home/weiyang/Documents/CNSRV/makedir/CMakeFiles/edit_cache.dir
-/home/weiyang/Documents/CNSRV/makedir/CMakeFiles/CNSRV.dir

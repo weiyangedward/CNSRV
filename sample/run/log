@@ -282,9 +282,9 @@ Assigning id 92 to node 104 in species ../data/network2.txt
 Assigning id 93 to node 49 in species ../data/network2.txt
 Assigning id 94 to node 83 in species ../data/network2.txt
 Orthology....
-orth_cost -25.0833, ortho_normalize_constant 1, coexpress_normalize_constant 17.1515, coexpression cc = 0.9, current_coexpress_cost -0.672243
+orth_cost -19.75, ortho_normalize_constant 1, coexpress_normalize_constant 17.1515, coexpression cc = 0.9, current_coexpress_cost -0.633735
 Called LearnGroundState
-Total time: 4.491929 s
+Total time: 4.861220 s
 Clustering destructor
 SpeciesNetwork destructor
 SpeciesNetwork destructor

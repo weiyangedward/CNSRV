@@ -5,7 +5,7 @@ This repo contains source code for "Common NetworkS ReVealed" (CNSRV) presented 
 # Code
 
 ### Compile:
-1. cd makedir/
+1. cd CNSRV/makedir/
 2. rm *
 3. cmake ..
 4. make
@@ -40,7 +40,7 @@ See sample/data/
 	species1, species2, species1_gene_id, species2_gene_id
 
 # To run:
-$ ./makedir/CNSRV
+$ ./CNSRV/makedir/CNSRV
 
 ### Run on sample dataset:
 1. cd sample/run/
