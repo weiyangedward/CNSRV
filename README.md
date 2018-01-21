@@ -31,7 +31,7 @@ See sample/data/
 ### Orthologous network:
 1. Non-directed (or bi-directional) graph, if there is an edge between gene1 and gene2, then in the orthologous network file, there are two rows for this edge:
 
-	gene1, gene2, 1
+	gene1, gene2, 1 \\
 	gene2, gene1, 1
 
 2. Orthologous edges are defined by orthologous mapping of genes between two species
