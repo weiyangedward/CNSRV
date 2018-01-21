@@ -49,8 +49,9 @@ $ ./makedir/CNSRV
 ### Evaluate results
 1. cd sample/eval/
 2. sh eval.sh (please compiled evaluate_CNSRV first)
-3. Script "./bin/combine_species_network.py" is used for combining coexpression networks of multiple species into one file
-4. Metrics in evaluation are mainly In/Out density ratio of each cluster at both of coexpression and orthologous networks
+3. Results of evaluation is a *.csv file
+4. Script "./bin/combine_species_network.py" is used for combining coexpression networks of multiple species into one file
+5. Metrics in evaluation are mainly In/Out density ratio of each cluster at both of coexpression and orthologous networks
 
 ### suggested parameters
 1. Parameters used to generate clustering results in paper: 
