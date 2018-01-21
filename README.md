@@ -20,7 +20,7 @@ See sample/data/
 ### Coexpression network:
 1. Non-directed (or bi-directional) graph, if there is an edge between gene1 and gene2, then in the coexpression network file, there are two rows for this edge:
 
-	gene1, gene2, 1
+	gene1, gene2, 1 <br />
 	gene2, gene1, 1
 
 2. file format:
